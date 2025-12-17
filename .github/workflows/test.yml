@@ -1,0 +1,22 @@
+# .github/workflows/debug.yml
+name: Debug Workflow
+on: workflow_dispatch
+
+jobs:
+  check-runner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check runner info
+        run: |
+          echo "Runner OS: $(uname -a)"
+          echo "Runner user: $(whoami)"
+          echo "Current directory: $(pwd)"
+          echo "GitHub Event: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "SHA: ${{ github.sha }}"
+          
+  test-self-hosted:
+    runs-on: self-hosted  # 测试自托管运行器
+    if: false  # 默认禁用，需要时启用
+    steps:
+      - run: echo "Self-hosted runner is available!"
